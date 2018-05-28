@@ -13,7 +13,7 @@ categories: ML
 ### 过拟合和欠拟合
 
 - 过拟合定义：$E_{in}$足够小，但是$E_{in}$和$E_{out}$相差甚远（常常发生在$d_{VC}\gt d_{VC}^\star$）
-- 欠拟合定义：$E_{in}$和$E_{out}$均过大（常常发生在$d_{VC}\lt d_{VC}^\star$
+- 欠拟合定义：$E_{in}$和$E_{out}$均过大（常常发生在$d_{VC}\lt d_{VC}^\star$）
 
 ### 导致过拟合的几大主要原因
 
@@ -24,7 +24,7 @@ categories: ML
 - Stochastic noise：属于“不可控”因素，来自于外界对数据的污染
 - Deterministic noise：可以视为假设函数集中最佳函数$h^\star$与潜在目标函数$f$的差异。与假设函数集有关，因此属于“可控”因素
 
-以下是针对$y=f(x)+\epsilon\sim Gaussin(\sum_{q=0}^{Q_f}\alpha_qx^q,\sigma^2)$为目标函数情况下的实验（其中坐标轴上每个点的数值表示$E_{out}(g_{10})-E_{out}(g_2)$的结果）
+以下是针对$y=f(x)+\epsilon\sim Gaussin(\sum_{q=0}^{Q_f}\alpha_qx^q,\sigma^2)$为目标函数情况下的实验（其中坐标轴上每个点的数值表示$E_{out}(g_{10})-E_{out}(g_2)$的结果，$Q_f$是指"潜在的目标函数"的复杂度）
 
 ![](MLF4/pic2.png)
 
@@ -44,8 +44,10 @@ categories: ML
 
 通过对参数$w$加入一些约束，从而起到减少假设函数集中假设函数的数量，从而有效减少了假设函数的复杂度。
 
-常见正则化的两种等价形式：
+常见正则化的两种等价形式（详细推导见课件）：
 ![](MLF4/pic3.png)
+
+（$\lambda$越大$\longleftrightarrow$更偏向于小的$w$$\longleftrightarrow$更小的C）
 
 ### 正则化背后的VC理论
 
@@ -77,7 +79,7 @@ $$
 **存在的矛盾**
 ![](MLF4/pic8.png)
 当$K$过大时：$g^-$远差于$g$，因此不能够代表选择的$\mathcal{H}$是“最佳的”
-当$K$过小时：$E_{val}(g^-)$与$E_{out}(g^-)$，则通过$E_{val}$的大小选出来的最佳$\mathcal{H}$，对测试集而言并非“最佳的”
+当$K$过小时：$E_{val}(g^-)$与$E_{out}(g^-)$相差较大，则通过$E_{val}$的大小选出来的最佳$\mathcal{H}$，对测试集而言并非“最佳的”
 
 实践中，常取$K=N/5$
 
@@ -106,7 +108,7 @@ $$
 
 ![](MLF4/pic12.png)
 
-### Data Snooping
+### Data Snooping（别偷看数据）
 
 ![](MLF4/pic13.png)
 

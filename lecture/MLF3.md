@@ -30,7 +30,7 @@ categories: ML
 
 ### 基于线性回归的二分类问题
 
-易知$err_{0/1}\le err_{sqr}$，从而有下面的关系：
+易知$err_{0/1}\le err_{sqr}$，（$err_{0/1}=[sign(w^Tx)\ne y]$，$err_{sqr}=(w^Tx-y)^2$）从而有下面的关系：
 ![](MLF3/pic5.png)
 可见，线性回归是二元分类问题的上界。但线性回归求参数$w$非常快(因为直接闭式解)，从而往往将其作为分类器的初始值
 
@@ -43,7 +43,7 @@ categories: ML
 
 ### Logistic回归基础
 
-目标函数和梯度函数
+目标函数和梯度函数（目标函数通过cross-entropy获得）
 ![](MLF3/pic7.png)
 由于梯度闭式解不能直接求出，又由于$\nabla E_{in}$是关于$w$的凸函数，所以采用梯度下降法来更新参数
 
@@ -72,7 +72,7 @@ categories: ML
 ​	真实情况下的梯度为：$\frac{1}{N}\sum_{n=1}^N\nabla err(w,x_n,y_n)=\mathcal{E}_{n}\nabla err(w,x_n,y_n)$。为了增加运算速度，采用随机选取一个数据$m$，用$\nabla err(w,x_m,y_m)$来代替上述的梯度。
 
 - 优点：简单，速度更快。且在数据量很大和在线学习(online learning)中非常有用
-- 缺点：相比原本的梯度下降法，稳定性要差一些
+- 缺点：相比原本的梯度下降法，稳定性要差一些（这也是为什么batch SGD更常见）
 
 ### 多类别分类问题
 
